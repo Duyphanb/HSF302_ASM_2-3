@@ -25,8 +25,8 @@ public class Food {
 
 
 
-    @Size(max = 500)
-    @Column(length = 500, columnDefinition = "nvarchar(150)")
+    @Size(max = 250)
+    @Column(length = 500, columnDefinition = "nvarchar(250)")
     private String description;
 
 
