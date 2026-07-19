@@ -28,15 +28,17 @@ public class Category {
     @Column(
             nullable = false,
             unique = true,
-            length = 100,
+            length = 150,
             columnDefinition = "nvarchar(150)"
     )
     private String name;
 
 
 
-    @Size(max = 255)
-    @Column(length = 255)
+    @Column(
+            length = 255,
+            columnDefinition = "nvarchar(255)"
+    )
     private String description;
 
 
