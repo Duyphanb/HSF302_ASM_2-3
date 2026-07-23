@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tính năng hệ thống</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-dark bg-dark shadow-sm"><div class="container"><a class="navbar-brand fw-bold" th:href="@{/food/donuong}">🔥 Food Shop</a><a class="btn btn-outline-light btn-sm" th:href="@{/cart}">🛒 Giỏ hàng</a></div></nav>
+<main class="container py-5">
+    <div class="text-center mb-5"><span class="badge text-bg-primary mb-2">PROJECT OVERVIEW</span><h1 class="fw-bold">Các tính năng của hệ thống</h1><p class="text-muted">Tổng hợp các module đang có trong dự án Food Shop.</p></div>
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-4"><div class="card h-100 border-0 shadow-sm feature-card" role="button" tabindex="0" onclick="location.href='/food/donuong'"><div class="card-body d-flex flex-column"><div class="display-6">🍖</div><h5 class="mt-3">Quản lý thực đơn</h5><p class="text-muted">Hiển thị danh sách món ăn, giá, mô tả, số lượng, danh mục và hình ảnh.</p><div class="mt-auto"><span class="badge text-bg-success">Đang hoạt động</span><a class="btn btn-sm btn-primary ms-2" th:href="@{/food/donuong}">Mở thực đơn</a></div></div></div></div>
+        <div class="col-md-6 col-lg-4"><div class="card h-100 border-0 shadow-sm feature-card" role="button" tabindex="0" onclick="location.href='/cart'"><div class="card-body d-flex flex-column"><div class="display-6">🛒</div><h5 class="mt-3">Giỏ hàng</h5><p class="text-muted">Thêm món, cập nhật số lượng, xóa món và tính tổng tiền ngay trên session.</p><div class="mt-auto"><span class="badge text-bg-success">Đang hoạt động</span><a class="btn btn-sm btn-primary ms-2" th:href="@{/cart}">Mở giỏ hàng</a></div></div></div></div>
+        <div class="col-md-6 col-lg-4"><div class="card h-100 border-0 shadow-sm feature-card" role="button" tabindex="0" onclick="location.href='/cart'"><div class="card-body d-flex flex-column"><div class="display-6">📱</div><h5 class="mt-3">Thanh toán QR</h5><p class="text-muted">Tạo đơn hàng, hiển thị mã VietQR kèm số tiền và nội dung chuyển khoản.</p><div class="mt-auto"><span class="badge text-bg-success">Đang hoạt động</span><a class="btn btn-sm btn-primary ms-2" th:href="@{/cart}">Thanh toán</a></div></div></div></div>
+        <div class="col-md-6 col-lg-4"><div class="card h-100 border-0 shadow-sm"><div class="card-body"><div class="display-6">🖼️</div><h5 class="mt-3">Upload hình ảnh</h5><p class="text-muted">Tích hợp Cloudinary để lưu trữ và hiển thị ảnh món ăn.</p><span class="badge text-bg-success">Đang hoạt động</span></div></div></div>
+        <div class="col-md-6 col-lg-4"><div class="card h-100 border-0 shadow-sm feature-card" role="button" tabindex="0" onclick="location.href='/'"><div class="card-body d-flex flex-column"><div class="display-6">🤖</div><h5 class="mt-3">AI Chatbox</h5><p class="text-muted">Widget chat AI hỗ trợ người dùng trong giao diện website.</p><div class="mt-auto"><span class="badge text-bg-success">Đang hoạt động</span><a class="btn btn-sm btn-primary ms-2" th:href="@{/}">Mở Dashboard</a></div></div></div></div>
+        <div class="col-md-6 col-lg-4"><div class="card h-100 border-0 shadow-sm"><div class="card-body"><div class="display-6">🗃️</div><h5 class="mt-3">Database</h5><p class="text-muted">Lưu trữ dữ liệu bằng SQL Server với Spring Data JPA/Hibernate.</p><span class="badge text-bg-success">Đang hoạt động</span></div></div></div>
+    </div>
+    <div class="text-center mt-5"><a class="btn btn-primary" th:href="@{/food/donuong}">Mở thực đơn</a></div>
+</main>
+<style>
+    .feature-card { cursor: pointer; transition: transform .2s, box-shadow .2s; }
+    .feature-card:hover { transform: translateY(-4px); box-shadow: 0 .5rem 1rem rgba(0,0,0,.15) !important; }
+</style>
+</body>
+</html>
