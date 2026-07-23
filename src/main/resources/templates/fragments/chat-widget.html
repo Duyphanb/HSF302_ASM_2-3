@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<body>
+
+<div th:fragment="chatWidget"
+     id="ai-chat-widget"
+     data-endpoint="/api/chat"
+     th:attr="data-endpoint=@{/api/chat}">
+
+    <button id="chat-toggle"
+            type="button"
+            class="btn btn-danger rounded-circle shadow-lg"
+            aria-label="Mở trợ lý AI"
+            aria-expanded="false"
+            style="
+                width: 60px;
+                height: 60px;
+                position: fixed;
+                right: 24px;
+                bottom: 24px;
+                z-index: 1050;
+                font-size: 24px;
+            ">
+        💬
+    </button>
+
+    <section id="chat-panel"
+             class="card border-0 shadow-lg"
+             aria-hidden="true"
+             style="
+                display: none;
+                width: 360px;
+                max-width: calc(100vw - 32px);
+                height: 500px;
+                max-height: calc(100vh - 120px);
+                position: fixed;
+                right: 24px;
+                bottom: 96px;
+                z-index: 1050;
+                overflow: hidden;
+             ">
+
+        <header class="card-header bg-danger text-white d-flex
+                       justify-content-between align-items-center">
+            <div>
+                <strong>🤖 Trợ lý món nướng</strong>
+                <div style="font-size: 12px; opacity: 0.9;">
+                    Hỏi về món ăn, giá và danh mục
+                </div>
+            </div>
+
+            <button id="chat-close"
+                    type="button"
+                    class="btn-close btn-close-white"
+                    aria-label="Đóng Chatbox">
+            </button>
+        </header>
+
+        <div id="chat-messages"
+             class="card-body bg-light overflow-auto"
+             aria-live="polite"
+             style="
+                 flex: 1;
+                 min-height: 0;
+                 white-space: pre-wrap;
+             ">
+            <div class="mb-3 text-start">
+                <span class="d-inline-block bg-white border rounded-3 p-2">
+                    Xin chào! Tôi có thể giúp bạn tìm món nướng phù hợp.
+                </span>
+            </div>
+        </div>
+
+        <footer class="card-footer bg-white">
+            <div class="input-group">
+                <input id="chat-input"
+                       type="text"
+                       class="form-control"
+                       maxlength="500"
+                       autocomplete="off"
+                       placeholder="Nhập câu hỏi...">
+
+                <button id="chat-send"
+                        type="button"
+                        class="btn btn-danger">
+                    Gửi
+                </button>
+            </div>
+
+            <small id="chat-status"
+                   class="d-block text-muted mt-1"
+                   aria-live="polite">
+            </small>
+        </footer>
+    </section>
+</div>
+
+</body>
+</html>
