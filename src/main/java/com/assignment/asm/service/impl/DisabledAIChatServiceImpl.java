@@ -1,5 +1,6 @@
 package com.assignment.asm.service.impl;
 
+import com.assignment.asm.exception.AiServiceUnavailableException;
 import com.assignment.asm.service.AiService;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
@@ -9,15 +10,16 @@ import org.springframework.stereotype.Service;
  */
 @Service
 @ConditionalOnProperty(
-        name = "app.ai.enabled",
-        havingValue = "false",
+        name = "spring.ai.model.chat",
+        havingValue = "none",
         matchIfMissing = true
 )
 public class DisabledAIChatServiceImpl implements AiService {
 
     @Override
     public String chat(String message) {
-        return "Tính năng AI Chatbox hiện đang tạm tắt. "
-                + "Vui lòng cấu hình Gemini API key để sử dụng.";
+        throw new AiServiceUnavailableException(
+                "Tính năng AI Chatbox hiện đang tạm tắt. Vui lòng cấu hình Gemini API key để sử dụng."
+        );
     }
 }

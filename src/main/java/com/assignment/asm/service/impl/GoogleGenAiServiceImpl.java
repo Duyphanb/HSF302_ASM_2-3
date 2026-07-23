@@ -1,6 +1,7 @@
 package com.assignment.asm.service.impl;
 
 import com.assignment.asm.entity.Food;
+import com.assignment.asm.exception.AiServiceUnavailableException;
 import com.assignment.asm.service.AiService;
 import com.assignment.asm.service.FoodService;
 import lombok.RequiredArgsConstructor;
@@ -24,8 +25,8 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @Slf4j
 @ConditionalOnProperty(
-        name = "app.ai.enabled",
-        havingValue = "true"
+        name = "spring.ai.model.chat",
+        havingValue = "google-genai"
 )
 public class GoogleGenAiServiceImpl implements AiService {
 
@@ -89,14 +90,11 @@ public class GoogleGenAiServiceImpl implements AiService {
 
             return answer.trim();
         } catch (Exception exception) {
-            log.error(
-                    "Không thể gọi Google Gemini cho câu hỏi: {}",
-                    message,
-                    exception
-            );
+            log.error("Không thể gọi Google Gemini", exception);
 
-            return "Dịch vụ AI hiện đang tạm thời không khả dụng. "
-                    + "Vui lòng thử lại sau.";
+            throw new AiServiceUnavailableException(
+                    "Dịch vụ AI hiện đang tạm thời không khả dụng. Vui lòng thử lại sau."
+            );
         }
     }
 
