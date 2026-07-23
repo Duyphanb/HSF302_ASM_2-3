@@ -1,0 +1,119 @@
+/* ==========================================================
+   style.css - Menu Đồ Nướng
+   Dùng chung với Bootstrap 5.3.3
+   ========================================================== */
+
+/* --- Nền trang & font chữ tổng thể --- */
+body {
+    background: linear-gradient(180deg, #fff8f0 0%, #ffffff 100%);
+    font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+}
+
+/* --- Tiêu đề chính --- */
+h1 {
+    font-weight: 700;
+    color: #d9480f;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.08);
+}
+
+/* --- Card bao ngoài bảng --- */
+.card {
+    border-radius: 1rem;
+    overflow: hidden;
+    background-color: #ffffff;
+}
+
+.card-body {
+    padding: 1.5rem;
+}
+
+/* --- Bảng --- */
+.table {
+    margin-bottom: 0;
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead.table-dark th {
+    background-color: #212529;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    letter-spacing: 0.5px;
+    vertical-align: middle;
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease, transform 0.15s ease;
+}
+
+.table-hover tbody tr:hover {
+    background-color: #fff3e0;
+    transform: scale(1.01);
+}
+
+.table td {
+    vertical-align: middle;
+    padding: 0.9rem 0.75rem;
+}
+
+/* --- Ảnh món ăn --- */
+.food-image {
+    width: 70px;
+    height: 70px;
+    object-fit: cover;
+    border-radius: 0.75rem;
+    border: 2px solid #f1f1f1;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.food-image:hover {
+    transform: scale(1.15);
+}
+
+/* --- Mô tả món ăn (cắt bớt nếu quá dài) --- */
+.description {
+    max-width: 260px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    color: #6c757d;
+    font-style: italic;
+}
+
+/* --- Badge giá tiền --- */
+.badge.bg-danger {
+    font-size: 0.85rem;
+    padding: 0.5em 0.8em;
+    border-radius: 0.6rem;
+}
+
+/* --- Badge số lượng --- */
+.badge.bg-success {
+    font-size: 0.85rem;
+    padding: 0.5em 0.8em;
+    border-radius: 0.6rem;
+}
+
+/* --- Badge danh mục --- */
+.badge.bg-warning {
+    font-size: 0.85rem;
+    padding: 0.5em 0.8em;
+    border-radius: 0.6rem;
+}
+
+/* --- Thông báo không có dữ liệu --- */
+.text-danger.fw-bold {
+    font-size: 1.1rem;
+    padding: 1.5rem 0;
+}
+
+/* --- Responsive: màn hình nhỏ --- */
+@media (max-width: 576px) {
+    .description {
+        max-width: 140px;
+    }
+
+}
