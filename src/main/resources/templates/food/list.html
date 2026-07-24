@@ -60,7 +60,9 @@
                     <td class="fw-bold" th:text="${x.name}"></td>
 
                     <!-- DESCRIPTION -->
-                    <td class="description" th:text="${x.description}"></td>
+                    <td>
+                        <div class="description-preview" th:utext="${x.description}"></div>
+                    </td>
 
                     <!-- PRICE -->
                     <td>
@@ -78,11 +80,10 @@
                     </td>
 
                     <td>
-                        <form method="post" th:action="@{/cart/add}">
-                            <input type="hidden" name="foodId" th:value="${x.id}">
-                            <input type="hidden" name="quantity" value="1">
-                            <button class="btn btn-primary btn-sm" type="submit">Thêm giỏ</button>
-                        </form>
+                        <a class="btn btn-outline-dark btn-sm"
+                           th:href="@{/food/donuong/{id}(id=${x.id})}">
+                            View
+                        </a>
                     </td>
                 </tr>
                 </tbody>
