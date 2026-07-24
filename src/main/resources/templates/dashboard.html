@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="vi" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Food Shop Dashboard</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body class="bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark shadow-sm">
+    <div class="container">
+        <a class="navbar-brand fw-bold" th:href="@{/}">🔥 Food Shop</a>
+        <div class="d-flex gap-2">
+            <a class="btn btn-outline-light btn-sm" th:href="@{/food/donuong}">Thực đơn</a>
+            <a class="btn btn-warning btn-sm" th:href="@{/cart}">🛒 Giỏ hàng</a>
+        </div>
+    </div>
+</nav>
+
+<main class="container py-5">
+    <div class="row align-items-center g-4 mb-5">
+        <div class="col-lg-8">
+            <span class="badge text-bg-danger mb-2">FOOD SHOP SYSTEM</span>
+            <h1 class="display-5 fw-bold">Xin chào, chào mừng đến Dashboard 👋</h1>
+            <p class="lead text-muted">Quản lý thực đơn, giỏ hàng và trải nghiệm thanh toán trong một nơi.</p>
+            <div class="d-flex flex-wrap gap-2">
+                <a class="btn btn-danger btn-lg" th:href="@{/food/donuong}">Mở thực đơn</a>
+                <a class="btn btn-outline-dark btn-lg" th:href="@{/features}">Xem tất cả tính năng</a>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card border-0 shadow-sm bg-danger text-white">
+                <div class="card-body p-4">
+                    <h5 class="card-title">Thanh toán nhanh</h5>
+                    <p class="card-text opacity-75">Thêm món vào giỏ và thanh toán bằng QR.</p>
+                    <a class="btn btn-light" th:href="@{/cart}">Đi đến giỏ hàng →</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row g-4 mb-5">
+        <div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">Món ăn</div><div class="display-6 fw-bold" th:text="${foodCount}">0</div><small class="text-muted">Đang có trong thực đơn</small></div></div></div>
+        <div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">Danh mục</div><div class="display-6 fw-bold" th:text="${categoryCount}">0</div><small class="text-muted">Nhóm món ăn</small></div></div></div>
+        <div class="col-md-4"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="text-muted">Thanh toán</div><div class="display-6 fw-bold">QR</div><small class="text-muted">VietQR chuyển khoản</small></div></div></div>
+    </div>
+
+    <h3 class="fw-bold mb-3">Truy cập nhanh</h3>
+    <div class="row g-4">
+        <div class="col-md-6 col-lg-3"><a class="text-decoration-none" th:href="@{/food/donuong}"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="fs-1">🍖</div><h5 class="text-dark mt-2">Thực đơn</h5><p class="text-muted mb-0">Xem món nướng và thêm món vào giỏ.</p></div></div></a></div>
+        <div class="col-md-6 col-lg-3"><a class="text-decoration-none" th:href="@{/cart}"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="fs-1">🛒</div><h5 class="text-dark mt-2">Giỏ hàng</h5><p class="text-muted mb-0">Kiểm tra món và tổng tiền.</p></div></div></a></div>
+        <div class="col-md-6 col-lg-3"><a class="text-decoration-none" th:href="@{/features}"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="fs-1">📋</div><h5 class="text-dark mt-2">Tính năng</h5><p class="text-muted mb-0">Tổng hợp các module của project.</p></div></div></a></div>
+        <div class="col-md-6 col-lg-3"><div class="card border-0 shadow-sm h-100"><div class="card-body"><div class="fs-1">🤖</div><h5 class="text-dark mt-2">AI Chatbox</h5><p class="text-muted mb-0">Mở nút chat góc phải để trải nghiệm.</p></div></div></div>
+    </div>
+</main>
+
+<div th:replace="~{fragments/chat-widget :: chatWidget}"></div>
+<script th:src="@{/js/chat-widget.js}"></script>
+</body>
+</html>
