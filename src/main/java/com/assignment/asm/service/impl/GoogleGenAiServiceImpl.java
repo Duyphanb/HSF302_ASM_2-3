@@ -1,19 +1,13 @@
 package com.assignment.asm.service.impl;
 
-import com.assignment.asm.entity.Food;
 import com.assignment.asm.exception.AiServiceUnavailableException;
 import com.assignment.asm.service.AiService;
-import com.assignment.asm.service.FoodService;
+import com.assignment.asm.service.RagService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.ai.chat.client.ChatClient;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import java.util.List;
-import java.util.Objects;
-import java.util.stream.Collectors;
 
 /**
  * Service gọi Google Gemini thông qua Spring AI.
@@ -31,29 +25,15 @@ import java.util.stream.Collectors;
 public class GoogleGenAiServiceImpl implements AiService {
 
     private final ChatClient chatClient;
-    private final FoodService foodService;
+    private final RagService ragService;
 
     @Override
-    @Transactional(readOnly = true)
     public String chat(String message) {
-        List<Food> foods = foodService.getAllFood();
+        String menuContext = ragService.retrieveContext(message);
 
-        if (foods == null || foods.isEmpty()) {
-            return "Hiện tại cửa hàng chưa có món ăn nào trong thực đơn.";
+        if (menuContext.isBlank()) {
+            return "Tôi không tìm thấy món ăn phù hợp trong dữ liệu thực đơn.";
         }
-
-        List<Food> availableFoods = foods.stream()
-                .filter(Objects::nonNull)
-                .filter(food -> Boolean.TRUE.equals(food.getStatus()))
-                .toList();
-
-        if (availableFoods.isEmpty()) {
-            return "Hiện tại cửa hàng chưa có món ăn nào đang được bán.";
-        }
-
-        String menuContext = availableFoods.stream()
-                .map(this::convertFoodToContext)
-                .collect(Collectors.joining("\n"));
 
         String systemPrompt = """
                 Bạn là trợ lý AI của một cửa hàng đồ nướng.
@@ -74,7 +54,7 @@ public class GoogleGenAiServiceImpl implements AiService {
                 8. Trả lời bằng văn bản thuần, không dùng HTML và không dùng Markdown.
                 9. Trả lời ngắn gọn, thân thiện và dễ hiểu.
 
-                THỰC ĐƠN:
+                CÁC MÓN LIÊN QUAN ĐƯỢC RAG TRUY XUẤT:
                 """ + menuContext;
 
         try {
@@ -98,47 +78,4 @@ public class GoogleGenAiServiceImpl implements AiService {
         }
     }
 
-    /**
-     * Chuyển một Food entity thành một dòng context cho Gemini.
-     */
-    private String convertFoodToContext(Food food) {
-        String categoryName = "Chưa phân loại";
-
-        if (food.getCategory() != null
-                && food.getCategory().getName() != null
-                && !food.getCategory().getName().isBlank()) {
-
-            categoryName = normalizeText(food.getCategory().getName());
-        }
-
-        String description = normalizeText(food.getDescription());
-        String name = normalizeText(food.getName());
-
-        Double price = food.getPrice();
-        Integer quantity = food.getQuantity();
-
-        return String.format(
-                "- Tên món: %s; Giá: %,.0f VNĐ; Số lượng còn lại: %d; "
-                        + "Danh mục: %s; Mô tả: %s",
-                name,
-                price != null ? price : 0D,
-                quantity != null ? quantity : 0,
-                categoryName,
-                description.isBlank() ? "Không có mô tả" : description
-        );
-    }
-
-    /**
-     * Chuẩn hóa text lấy từ database trước khi đưa vào prompt.
-     */
-    private String normalizeText(String value) {
-        if (value == null) {
-            return "";
-        }
-
-        return value
-                .replaceAll("[\\r\\n\\t]+", " ")
-                .replaceAll("\\s{2,}", " ")
-                .trim();
-    }
 }

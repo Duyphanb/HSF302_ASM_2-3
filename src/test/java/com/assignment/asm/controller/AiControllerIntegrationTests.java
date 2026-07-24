@@ -14,7 +14,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(properties = {
+        "app.ai.enabled=false",
         "spring.ai.model.chat=none",
+        "spring.ai.model.embedding.text=none",
         "spring.ai.google.genai.api-key="
 })
 @AutoConfigureMockMvc
